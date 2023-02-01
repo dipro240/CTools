@@ -3,7 +3,7 @@ Fakt strasne napicu script kterej prakticky jen oddeluje heslo od emailu, cimz t
 
 ` main.py -h ` a treba ti to pomuze
 
-**`-v` a `-q` NEFUNGUJOU protoze jsem linej a nemam na to cas a radsi hulim vodni dymky**
+**`-v` a `-s` NEFUNGUJOU protoze jsem linej a nemam na to cas a radsi hulim vodni dymky**
 
 ## Hlavni duvody proc to pouzivat (ne)
  - Nic jineho takhle zbvytecneho a debilniho neexistuje
