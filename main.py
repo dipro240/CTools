@@ -1,5 +1,8 @@
+import os
 import os.path
 import argparse
+import ntpath
+from pathlib import Path
 
 def separate_pass():
     klajny = kfile.readline()
@@ -12,7 +15,7 @@ def separate_pass():
     kfile.close()
     final.close()
 
-    if args.remduplicates == 1:
+    if args.remduplicates == 1: #toz tutaj se zacinaji ty oddelovaciiiiii veci
         def remove_duplicate():
             hesla = open(finalf, 'r').read()
             hesla = hesla.split()
@@ -33,6 +36,7 @@ def separate_pass():
 
 
 
+
 MAPA_komandu = {'sPass' : separate_pass}
 
 parser = argparse.ArgumentParser(usage="%(prog)s <command> <patha> [OPTIONY]", formatter_class=argparse.RawTextHelpFormatter,
@@ -43,24 +47,29 @@ parser.add_argument("command", nargs='?', default="sPass", choices=MAPA_komandu.
                     help="brasko tutaj vlastne vybiras co chces zeo delat zeo\n"
                     "-sPass - defaultni - proste jen separuje hesla od mailu\n"
                     "-rPass - oddela heslo jakoze uplne ho pojebe, zbyvaju jen maily\n"
-                    "-ePass - editacni saskarna, mozes sortovat a removovat duplikaty take saskarny (-rD, -s...)\n")
+                    "-ePass - editacni saskarna, mozes sortovat a removovat duplikaty take saskarny (-rD, -s...)\n"
+                    " ")
 
 parser.add_argument("patha", help="sem zandas ten centralni kombo fajl")
 
 parser.add_argument("-out", "--outputpath", metavar=("<path>"),
-                    help="Necheme byt in chceme byt out - rekni insanii kam to chces ulozit, "
-                         "jinak to ulozi tam kde zrovna ses %(metavar)s",
+                    help="Necheme byt in chceme byt out - rekni insanii kam to chces ulozit,\n"
+                         "jinak to ulozi tam kde zrovna ses %(metavar)s\n"
+                         " ",
                     default=0)
 
 parser.add_argument("-n", "--name", default=0, metavar="<newname>",
-                    help="Nastavi nove jmeno souboru kdyz uz teda tam chces cpat aj ten adresar (nebo i bez nej kdyz ses gay)\n"
-                    "Defaultni novy jmeno je ve formatu <nazevpuvodnihokomba:command>" )
+                    help="Nastavi nove jmeno souboru kdyz uz teda tam chces cpat aj ten adresar\n(nebo i bez nej kdyz ses gay)"
+                    " Defaultni novy jmeno je ve formatu <nazevpuvodnihokomba:command>\n"
+                    " ")
 
 parser.add_argument("-rD", "--remduplicates", action="store_true",
-                    help="Vymaze ti z listu hesel duplikaty; procisti rasu")
+                    help="Vymaze ti z listu hesel duplikaty; procisti rasu\n"
+                    " ")
 
 parser.add_argument("-s", "--sort", default=100, metavar="[cislo]",
-                    help="Sortne ze od nejvic top hesla co tam je visco a navic muzes rict kolik toho chces")
+                    help="Sortne ze od nejvic top hesla co tam je visco a navic muzes rict kolik toho chces\n"
+                    " ")
 
 parser.add_argument("-v", "--verbosity",
                     help="kokot ukecanej jak olga na dotacnim seminari", action="store_true")
@@ -69,8 +78,12 @@ args = parser.parse_args()
 
 print("Toz tak startuju TY TŮLY")
 
-fname = "\purepass.txt"
 kpath = args.patha
+fname = args.name 
+if fname == 0:
+    fname = "\CTooled-" + ntpath.basename(kpath)
+else:
+    fname = "\\" + fname + ".txt"
 outpath = args.outputpath
 if outpath == 0:
     outpath = os.path.dirname(os.path.abspath(kpath))
