@@ -1,5 +1,6 @@
 # CTools
 Fakt strasne napicu script kterej prakticky jen oddeluje heslo od emailu, cimz ti z nej udela wordlist vlastne akoratzevubec.
+HEJ KAMO TREBA LINUX TE S TIM POSLE TEZCE DOPRDELE PROTOZE PATHY, ale dw na tom se pracuje <3
 
 ` main.py -h ` a treba ti to pomuze
 
