@@ -8,7 +8,7 @@ Fakt strasne napicu script kterej prakticky jen oddeluje heslo od emailu, cimz t
 ## Hlavni duvody proc to pouzivat (ne)
  - Nic jineho takhle zbvytecneho a debilniho neexistuje
  - Je to dost rozbity zatim a wtf treba to nekdy bude fungovat.
- - Vali to asi 32K lajn za minutu, coz je na tu mou wooden masinu ze skladky celkem zazrak
+ - Vali to asi 32K lajn za vterinu, coz je na tu mou wooden masinu ze skladky celkem zazrak
  - **Actually je to schopny oddelit heslo od mailu, a to i když je v mailu nebo hesle `:`**
  
  achjo
