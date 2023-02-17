@@ -2,6 +2,8 @@ import argparse
 import os
 import os.path
 import pathlib
+import collections
+from pathlib import Path
 
 
 def separate_pass():
@@ -15,26 +17,48 @@ def separate_pass():
     kfile.close()
     final.close()
 
-    if args.remduplicates == 1:  # toz tutaj se zacinaji ty oddelovaciiiiii veci
-        def remove_duplicate():
-            hesla = open(finalf, 'r').read()
-            hesla = hesla.split()
-            clean_list = []
-            for heslo in hesla:
-                if heslo not in clean_list:
-                    clean_list.append(heslo)
-            return clean_list
-            hesla.close()
-
-        docasnysranec = pathlib.PurePath(finalf.name + '.temp.txt')
-        no_duplicate_hesla = open(docasnysranec, 'w')
-
-        for heslo in remove_duplicate():
-            heslo = heslo.strip(',')
-            no_duplicate_hesla.write(f"{heslo}\n")
-        no_duplicate_hesla.close()
+    if args.sort > 0: # toz tutaj bude sort
+        global sortnum
+        print("sortLOG69: ziju<3")
+        docasnysranec = pathlib.PurePath(finalf.with_name(fname + '.temp.txt'))
+        sortnuto = open(docasnysranec,  'w', encoding='utf-8')
+        with open(finalf, encoding='utf-8') as infile:
+            counts = collections.Counter(l.strip() for l in infile)
+            for line, count in counts.most_common():
+                if sortnum > 0:
+                    sortnum -= sortnum
+                    line = line.strip(',')
+                    sortnuto.write(f"{line}\n")
+        sortnuto.close()
         os.remove(finalf)
         os.rename(docasnysranec, finalf)
+        print("sort konciiii")
+
+    if args.remduplicates == 1:  # toz tutaj se zacinaji ty oddelovaciiiiii veci
+        print("deduplikatorrr aaa tutaajjj")
+        if sortnum == 0:
+            print("KAMO DEBILE KOKOTE VSAK UZS SORTOVAL TO I MAZE SMH ZY SES KOKOT")
+        else:
+            def remove_duplicate():
+                hesla = open(finalf, 'r', encoding='utf-8').read()
+                hesla = hesla.split()
+                clean_list = []
+                for heslo in hesla:
+                    if heslo not in clean_list:
+                        clean_list.append(heslo)
+                return clean_list
+                hesla.close()
+
+            docasnysranec = pathlib.PurePath(finalf.with_name(fname + '.temp.txt'))
+            no_duplicate_hesla = open(docasnysranec, 'w', encoding='utf-8')
+
+            for heslo in remove_duplicate():
+                heslo = heslo.strip(',')
+                no_duplicate_hesla.write(f"{heslo}\n")
+            no_duplicate_hesla.close()
+            os.remove(finalf)
+            os.rename(docasnysranec, finalf)
+            print("deduplikator konciiii")
 
 
 MAPA_komandu = {'sPass': separate_pass}
@@ -68,7 +92,7 @@ parser.add_argument("-rD", "--remduplicates", action="store_true",
                     help="Vymaze ti z listu hesel duplikaty; procisti rasu\n"
                          " ")
 
-parser.add_argument("-s", "--sort", default=100, metavar="[cislo]",
+parser.add_argument("-s", "--sort", default=0, const=100, metavar="cislo", nargs='?', type=int,
                     help="Sortne ze od nejvic top hesla co tam je visco a navic muzes rict kolik toho chces\n"
                          " ")
 
@@ -80,6 +104,7 @@ args = parser.parse_args()
 print("Toz tak startuju TY TŮLY")
 
 kpath = pathlib.PurePath(args.patha)
+sortnum = args.sort
 outpath = args.outputpath
 if outpath == 0:
     outpath = kpath.parent
