@@ -5,7 +5,7 @@ asi po dvouhodinach jsem to prepsal lol a uz to jede
 
 ` main.py -h ` a treba ti to pomuze
 
-**`-v` a `-s` NEFUNGUJOU protoze jsem linej a nemam na to cas a radsi hulim vodni dymky**
+**`-v` NEFUNGUJE protoze jsem linej a nemam na to cas a radsi hulim vodni dymky**
 
 ## Hlavni duvody proc to pouzivat (ne)
  - Nic jineho takhle zbvytecneho a debilniho neexistuje
