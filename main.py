@@ -26,7 +26,7 @@ def separate_pass():
             counts = collections.Counter(l.strip() for l in infile)
             for line, count in counts.most_common():
                 if sortnum > 0:
-                    sortnum -= sortnum
+                    sortnum -= 1
                     line = line.strip(',')
                     sortnuto.write(f"{line}\n")
         sortnuto.close()
